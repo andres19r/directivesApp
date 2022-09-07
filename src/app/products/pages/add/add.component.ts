@@ -7,7 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add.component.css'],
 })
 export class AddComponent implements OnInit {
-  colorCustom: string = 'green';
+  colorCustom: string = 'red';
+  text1: string = 'Andres Rivero';
   myForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
   });
@@ -18,5 +19,13 @@ export class AddComponent implements OnInit {
 
   hasError(field: string): boolean {
     return this.myForm.get('name')?.invalid || false;
+  }
+
+  changeName() {
+    this.text1 = 'Juan Carlos';
+  }
+  
+  changeColor() {
+    this.colorCustom = 'blue';
   }
 }

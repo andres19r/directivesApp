@@ -1,9 +1,16 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Directive({
   selector: '[error-msg]',
 })
-export class ErrorMsgDirective implements OnInit {
+export class ErrorMsgDirective implements OnInit, OnChanges {
   htmlElement: ElementRef<HTMLElement>;
   @Input() color: string = 'red';
   @Input() message: string = 'This field is mandatory';
@@ -15,6 +22,17 @@ export class ErrorMsgDirective implements OnInit {
   ngOnInit(): void {
     this.setColor();
     this.setMessage();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['message']) {
+      const newMessage = changes['message']?.currentValue;
+      this.htmlElement.nativeElement.innerText = newMessage;
+    }
+    if (changes['color']) {
+      const newColor = changes['color']?.currentValue;
+      this.htmlElement.nativeElement.style.color = newColor;
+    }
   }
 
   setColor(): void {

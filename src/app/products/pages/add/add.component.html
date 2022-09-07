@@ -14,6 +14,8 @@
     <div class="col-auto">
       <span
         error-msg
+        [message]="text1"
+        [color]="colorCustom"
         *ngIf="hasError('name')"
       ></span>
     </div>
@@ -21,7 +23,9 @@
 
   <div class="row mt-3">
     <div class="col">
-      <button class="btn btn-primary">Save</button>
+      <button (click)="changeName()" class="btn btn-primary">Save</button>
+      &nbsp;
+      <button (click)="changeColor()" class="btn btn-primary">Change Color</button>
     </div>
   </div>
 </form>
