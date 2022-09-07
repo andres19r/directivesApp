@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add.component.css'],
 })
 export class AddComponent implements OnInit {
+  colorCustom: string = 'green';
   myForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
   });
