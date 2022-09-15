@@ -15,13 +15,14 @@ export class ErrorMsgDirective implements OnInit, OnChanges {
   private _color: string = 'red'
   private _message: string = 'This field is required'
 
+  // this @Input set only triggers if the property changes
   @Input() set color(value: string) {
-    this.htmlElement.nativeElement.style.color = value;
     this._color = value;
+    this.setColor();
   }
   @Input() set message(value: string) {
-    this.htmlElement.nativeElement.innerHTML = value;
     this._message = value;
+    this.setMessage();
   }
 
   constructor(private el: ElementRef<HTMLElement>) {
@@ -29,23 +30,24 @@ export class ErrorMsgDirective implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    // this.setColor();
-    // this.setMessage();
-  }
-
-  setStyle(): void {
-    this.htmlElement.nativeElement.classList.add('form-text');
+    this.setColor();
+    this.setMessage();
+    this.setStyle();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
 
   }
 
+  setStyle(): void {
+    this.htmlElement.nativeElement.classList.add('form-text');
+  }
+
   setColor(): void {
-    this.htmlElement.nativeElement.style.color = this.color;
+    this.htmlElement.nativeElement.style.color = this._color;
   }
 
   setMessage(): void {
-    this.htmlElement.nativeElement.innerText = this.message;
+    this.htmlElement.nativeElement.innerText = this._message;
   }
 }
