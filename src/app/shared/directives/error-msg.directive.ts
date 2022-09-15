@@ -12,32 +12,37 @@ import {
 })
 export class ErrorMsgDirective implements OnInit, OnChanges {
   htmlElement: ElementRef<HTMLElement>;
-  @Input() color: string = 'red';
-  @Input() message: string = 'This field is mandatory';
+  private _color: string = 'red'
+  private _message: string = 'This field is required'
+
+  @Input() set color(value: string) {
+    this.htmlElement.nativeElement.style.color = value;
+    this._color = value;
+  }
+  @Input() set message(value: string) {
+    this.htmlElement.nativeElement.innerHTML = value;
+    this._message = value;
+  }
 
   constructor(private el: ElementRef<HTMLElement>) {
     this.htmlElement = el;
   }
 
   ngOnInit(): void {
-    this.setColor();
-    this.setMessage();
+    // this.setColor();
+    // this.setMessage();
+  }
+
+  setStyle(): void {
+    this.htmlElement.nativeElement.classList.add('form-text');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['message']) {
-      const newMessage = changes['message']?.currentValue;
-      this.htmlElement.nativeElement.innerText = newMessage;
-    }
-    if (changes['color']) {
-      const newColor = changes['color']?.currentValue;
-      this.htmlElement.nativeElement.style.color = newColor;
-    }
+
   }
 
   setColor(): void {
     this.htmlElement.nativeElement.style.color = this.color;
-    this.htmlElement.nativeElement.classList.add('form-text');
   }
 
   setMessage(): void {

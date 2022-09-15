@@ -22,10 +22,11 @@ export class AddComponent implements OnInit {
   }
 
   changeName() {
-    this.text1 = 'Juan Carlos';
+    this.text1 = Math.random().toString();
   }
   
   changeColor() {
-    this.colorCustom = 'blue';
+    const color = "#xxxxxx".replace(/x/g, y=>(Math.random()*16|0).toString(16));
+    this.colorCustom = color;
   }
 }
