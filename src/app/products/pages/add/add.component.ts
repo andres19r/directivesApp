@@ -18,7 +18,7 @@ export class AddComponent implements OnInit {
   ngOnInit(): void {}
 
   hasError(field: string): boolean {
-    return this.myForm.get('name')?.invalid || false;
+    return this.myForm.get(field)?.invalid || false;
   }
 
   changeName() {
